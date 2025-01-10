@@ -1,0 +1,11 @@
+.gap-2 {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+}
+
+.gap-4 {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}

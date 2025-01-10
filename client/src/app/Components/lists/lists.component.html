@@ -1,0 +1,32 @@
+<div class="text-center mt-3">
+  <h2>{{predicate === 'liked' ? 'Members I Like' : 'Members Who Likes Me'}}</h2>
+</div>
+
+
+<div class="d-flex gap-4">
+  <div class="flex items-center d-flex gap-1">
+      <p-radiobutton (onClick)="loadLikes()" name="orderBy" value="liked" [(ngModel)]="predicate" inputId="order1" />
+      <label for="order1" class="ml-2">Members I Like</label>
+  </div>
+  <div class="flex items-center d-flex gap-1">
+      <p-radiobutton (onClick)="loadLikes()" name="orderBy" value="likedBy" [(ngModel)]="predicate" inputId="order2" />
+      <label for="order2" class="ml-2">Members Who Like Me</label>
+  </div>
+</div>
+
+<div class="row mt-3">
+  <div class="col-2" *ngFor="let member of members">
+    <app-member-card [member]="member!"></app-member-card>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center" *ngIf="pagination">
+  <p-paginator
+    (onPageChange)="onPageChange($event)"
+    [first]="(pageNumber - 1) * pageSize"
+    [rows]="pagination.itemPerPage || 5"
+    [totalRecords]="pagination.totalItems"
+    [showPageLinks]="true"
+    [rowsPerPageOptions]="[5, 10, 20, 30]"
+  />
+</div>

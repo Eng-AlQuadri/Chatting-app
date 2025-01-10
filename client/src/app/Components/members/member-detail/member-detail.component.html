@@ -1,0 +1,75 @@
+<div class="row" *ngIf="member">
+  <div class="col-4">
+    <div class="card">
+      <img src="{{member.photoUrl}}" alt="./assets/user.jpg" class="card-img-top img-thumbnail">
+    </div>
+    <div class="card-body">
+      <div class="mb-2" *ngIf="(presence.onlineUsers$ | async)?.includes(member.userName)">
+        <i class="fa fa-user-circle text-success"></i> Online Now
+      </div>
+      <div>
+        <strong>Location: </strong>
+        <p>{{member.city}}, {{member.country}}</p>
+      </div>
+      <div>
+        <strong>Age: </strong>
+        <p>{{member.age}}</p>
+      </div>
+      <div>
+        <strong>Last Active: </strong>
+        <p>{{member.lastActive}}</p>
+      </div>
+      <div>
+        <strong>Member Since: </strong>
+        <p>{{member.created | date: 'longDate'}}</p>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-primary">Like</button>
+      <button (click)="selectTab(3)" class="btn btn-primary">Message</button>
+    </div>
+  </div>
+
+  <div class="col-8">
+    <p-tabs value="0">
+      <p-tablist>
+          <p-tab value="0">About {{member.knownAs}}</p-tab>
+          <p-tab value="1">Interests</p-tab>
+          <p-tab value="2">Photos</p-tab>
+          <p-tab value="3">Messages</p-tab>
+      </p-tablist>
+      <p-tabpanels>
+        <p-tabpanel value="0">
+          <h4>Description</h4>
+          <p>{{member.introduction}}</p>
+          <h4>Looking For</h4>
+          <p>{{member.lookingFor}}</p>
+        </p-tabpanel>
+        <p-tabpanel value="1">
+          <h4>Interests</h4>
+          <p>{{member.interests}}</p>
+        </p-tabpanel>
+        <p-tabpanel value="2">
+          <h4>Photos</h4>
+          <p-galleria
+            [value]="imageUrls"
+            [responsiveOptions]="[]"
+            [numVisible]="5"
+            [showThumbnails]="true"
+            [thumbnailsPosition]="'bottom'"
+            [style]="{ 'max-width': '400px' }">
+            <ng-template pTemplate="item" let-item>
+              <img [src]="item.itemImageSrc" [alt]="item.alt" style="width:100%" />
+            </ng-template>
+            <ng-template pTemplate="thumbnail" let-item>
+              <img [src]="item.thumbnailImageSrc" [alt]="item.alt" style="width: 128px; height: 128px;" />
+            </ng-template>
+          </p-galleria>
+        </p-tabpanel>
+        <p-tabpanel value="3">
+          <app-member-messages [username]="member.userName"></app-member-messages>
+        </p-tabpanel>
+      </p-tabpanels>
+    </p-tabs>
+  </div>
+</div>

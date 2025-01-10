@@ -1,0 +1,16 @@
+<div class="row">
+  <table class="table">
+    <tr>
+      <td style="width: 30%;">UserName</td>
+      <td style="width: 40%;">Active Roles</td>
+      <td style="width: 30%;">UserName</td>
+    </tr>
+    <tr *ngFor="let user of users">
+      <td>{{user?.username}}</td>
+      <td>{{user?.roles}}</td>
+      <td><button (click)="showDialog(user!)" class="btn btn-info">Edit Roles</button></td>
+    </tr>
+  </table>
+</div>
+
+<app-roles-modal (userUpdated)="updateUser($event)"></app-roles-modal>

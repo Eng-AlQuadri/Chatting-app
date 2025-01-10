@@ -1,0 +1,15 @@
+.head-img {
+  width: 50px;
+  border-radius: 50%;
+}
+
+.dropdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.fixed-top {
+  z-index: 100 !important;
+}

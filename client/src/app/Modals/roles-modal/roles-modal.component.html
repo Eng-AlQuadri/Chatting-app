@@ -1,0 +1,23 @@
+<div class="card flex justify-center" style="display: block;">
+  <p-dialog header="Edit Profile" [(visible)]="visible" [style]="{ width: '25rem' }">
+      <span class="p-text-secondary block mb-8">Edit Roles For: {{user?.username}}</span>
+      <form>
+        <div *ngFor="let role of roles" class="flex items-center gap-4 mb-4 form-check">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            [checked]="role.checked"
+            value = "role.name"
+            (change)="role.checked = !role.checked"
+            [disabled]="role.name === 'Admin' && user.username == 'admin'"
+          >
+          <label>{{role.name}}</label>
+        </div>
+      </form>
+
+      <div class="flex justify-end gap-2">
+          <p-button label="Cancel" severity="secondary" (click)="visible = false" />
+          <p-button label="Save" (click)="updateRoles()" />
+      </div>
+  </p-dialog>
+</div>
